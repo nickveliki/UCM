@@ -1,0 +1,15 @@
+{
+  "name": "ucm",
+  "version": "1.0.0",
+  "description": "encrypted open message exchange",
+  "main": "index.js",
+  "scripts": {
+    "test": "nerp"
+  },
+  "keywords": [
+    "encrypt",
+    "messenger"
+  ],
+  "author": "nickveliki",
+  "license": "ISC"
+}
