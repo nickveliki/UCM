@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const route = require("./route");
+const path = require("path");
 app.use(bodyParser.json());
 app.use("/", express.static("./htdocs"));
 app.use((req, res, next)=>{
@@ -14,4 +15,7 @@ app.use((req, res, next)=>{
     next();
 })
 app.use("/umc", route);
+app.get("*", (req, res)=>{
+    res.sendFile(path.resolve("./htdocs/index.html"));
+})
 module.exports=app;

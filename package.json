@@ -4,7 +4,8 @@
   "description": "encrypted open message exchange",
   "main": "index.js",
   "scripts": {
-    "test": "nerp"
+    "test": "nerp",
+    "dev": "node index.js 3000 ./.secdat"
   },
   "keywords": [
     "encrypt",
@@ -15,6 +16,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "jables": "git+https://github.com/nickveliki/Jabels.git"
+    "jables": "git+https://github.com/nickveliki/Jabels.git",
+    "jables-multiproc": "git+https://github.com/nickveliki/jables-multiproc.git"
   }
 }
