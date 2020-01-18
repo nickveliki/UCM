@@ -1,4 +1,4 @@
-const https = require("http2");
+const https = require("https");
 const app = require("./app/app");
 const fs = require("fs");
 https.createServer({
