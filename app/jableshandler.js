@@ -39,7 +39,7 @@ setInterval(()=>{
                 deleted[0]++;
             }
             if (del){
-                write.push(Jables.update({path: "fingerprints", indexKey: "fingerprint", fingerprint: Version.fingerprint, messages: Version.messages}));
+                write.push({path: "fingerprints", indexKey: "fingerprint", fingerprint: Version.fingerprint, messages: Version.messages});
             }
         });
         jables.writeDefinition({location, definition:write}).then(()=>{
