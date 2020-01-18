@@ -1,6 +1,6 @@
 const jables = require("jables-multiproc");
 const crypto = require("crypto");
-const secdatpath = process.argv[2]||"/etc/umc/.secdat";
+const secdatpath = process.argv[3]||"/etc/umc/.secdat";
 const location = "./udb/";
 jables.setup({location, secDatFileLoc:secdatpath});
 const getMessages = (fingerprint)=>jables.getDefinitionProperty({location, definition:{path: "fingerprints", indexKey:"fingerprint", fingerprint, property: "messages"}});

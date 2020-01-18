@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nerp",
-    "dev": "node index.js 3000 ./.secdat"
+    "dev": "node dev.js 3000 ./.secdat"
   },
   "keywords": [
     "encrypt",
