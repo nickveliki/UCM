@@ -1,5 +1,5 @@
 const route = require("express").Router();
-const jables = require("./jableshandler");
+const jables = require("../jableshandler");
 
 route.get("/:fingerprint", (req, res, next)=>{
     console.log("GET request to fingerprint");
