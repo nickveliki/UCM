@@ -63,9 +63,7 @@ route.post("/message/:src/:dest", (req, res, next)=>{
     jables.sendMessage(req.params.src, req.params.dest, req.body.message).then((ful)=>{
         res.status(201).json("message sent");
         pushMessage(req.params.dest, `${JSON.stringify({title:'YOU GOT MAIL', show:false, body:req.params.src})}`).then((status)=>{
-            if(status==201){
-                pushMessage(req.params.src, `${req.params.dest} is online, maybe they'll answer promptly`).then(()=>{}).catch(console.log)
-            }
+            pushMessage(req.params.src, JSON.stringify({title:'MESSAGE SENT', show: false, body:req.params.dest, online:status==201})).then(()=>{}).catch(console.log)
         }).catch(console.log);
     }).catch((err)=>{
         res.status(err.error||500).json(err.message);
