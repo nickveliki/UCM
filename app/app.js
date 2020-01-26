@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const route = require("./route");
 const path = require("path");
+
 app.use(bodyParser.json());
 app.use("/", express.static("./htdocs"));
 app.use((req, res, next)=>{
