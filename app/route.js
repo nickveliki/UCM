@@ -47,7 +47,7 @@ const pushMessage = (fingerprint, message)=>new Promise((res, rej)=>{
             res(statusCode);
         }, rej);
     }else{
-        rej(404);
+        res(404);
     }
 })
 route.get("/:fingerprint", (req, res, next)=>{
