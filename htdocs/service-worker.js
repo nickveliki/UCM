@@ -19,7 +19,7 @@ self.addEventListener('push', ({data}) => {
     if(clients.length>0){
       clients[0].postMessage(data.text());
     }else{
-      clients.claim().then(()=>{
+      self.clients.claim().then(()=>{
         clients[0].postMessage(data.text());
       })
     }
