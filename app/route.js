@@ -33,8 +33,10 @@ const verify = (fingerprint, signature, message)=>new Promise((res, rej)=>{
     }).catch(rej);
 })
 const pushMessage = (fingerprint, message)=>new Promise((res, rej)=>{
+    if(typeof(message)==='object'){
+        message=JSON.stringify(message);
+    }
     const {i, before} = searchArray('fingerprint', fingerprint, activeSubscriptions);
-    console.log({i, before});
     if(before===undefined){
         const {endpoint, auth, p256dh} = activeSubscriptions[i].subscription;
         webpush.sendNotification({
@@ -90,12 +92,17 @@ route.post("/subscribe/:fingerprint", (req, res, next)=>{
                 }else if (!before&&i==activeSubscriptions.length-1){
                     activeSubscriptions.push({fingerprint, subscription:{endpoint, p256dh, auth}});
                 } else{
-                    activeSubscriptions.splice(i+1, 0, {fingerprint, subscription:{endpoint, p256dh, auth}})
+                    activeSubscriptions.splice(i+1, 0, {fingerprint, subscription:{endpoint, p256dh, auth}});
                 }
                 res.status(200).json("ok");
+                pushMessage(fingerprint, {show: true, title: "SUCCESFUL DEVICE REGISTRATION", body:"You will now receive notifications on this device"}).then(()=>{}, console.log);
             }else{
-                res.status(401).json("fingerprint error");
+                pushMessage(fingerprint, {show:true, title: "NEW DEVICE REGISTRATION", body:"If this wasn't you, you've been hacked. Deal with it..."}).then(()=>{
+                    console.log(activeSubscriptions.splice(i, 1, {fingerprint, subscription:{endpoint, p256dh, auth}}), fingerprint);
+                    pushMessage(fingerprint, {show: true, title: "SUCCESFUL DEVICE REGISTRATION", body:"You will now receive notifications on this device"});
+                }, console.log);
             }
+            
         }else{
             res.status(401).json('crypto rejection');
         }
