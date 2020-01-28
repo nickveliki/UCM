@@ -7,7 +7,7 @@ self.addEventListener('activate', event => {
 });
 let client;
 workbox.routing.registerRoute(
-  new RegExp('https://localhost'),
+  new RegExp('https://thern.wtf'),
   new workbox.strategies.StaleWhileRevalidate()
 );
 /*self.addEventListener('message', ( {source})=>{
