@@ -1,4 +1,4 @@
-importScripts("precache-manifest.ba2007c51190138cf2eee576445afa5d.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.bba48825424b6543253aca56fd61ab26.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 workbox.core.skipWaiting();
 self.addEventListener('activate', event => {
@@ -7,7 +7,7 @@ self.addEventListener('activate', event => {
 });
 let client;
 workbox.routing.registerRoute(
-  new RegExp('https://thern.wtf'),
+  new RegExp('https://localhost'),
   new workbox.strategies.StaleWhileRevalidate()
 );
 self.addEventListener('message', ( {source})=>{

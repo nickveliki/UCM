@@ -100,6 +100,7 @@ route.post("/subscribe/:fingerprint", (req, res, next)=>{
                 pushMessage(fingerprint, {show:true, title: "NEW DEVICE REGISTRATION", body:"If this wasn't you, you've been hacked. Deal with it..."}).then(()=>{
                     console.log(activeSubscriptions.splice(i, 1, {fingerprint, subscription:{endpoint, p256dh, auth}}), fingerprint);
                     pushMessage(fingerprint, {show: true, title: "SUCCESFUL DEVICE REGISTRATION", body:"You will now receive notifications on this device"});
+                    res.status(200).json("ok");
                 }, console.log);
             }
             
