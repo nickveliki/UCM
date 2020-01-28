@@ -18,7 +18,6 @@ workbox.routing.registerRoute(
   new workbox.strategies.StaleWhileRevalidate()
 );
 self.addEventListener('message', ( {source})=>{
-  self.registration.
     source.postMessage(JSON.stringify({show: true, title:"READY TO ROCK!", body:"You can now receive notifications on this app. Please allow them, we promise we won't bother you!"}))
 })
 self.addEventListener('push', ({data}) => {
