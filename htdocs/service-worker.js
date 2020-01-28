@@ -17,8 +17,10 @@ workbox.routing.registerRoute(
 self.addEventListener('push', ({data}) => {
   self.clients.matchAll().then((clients)=>{
     if(clients.length>0){
+      console.log("found a client");
       clients[0].postMessage(data.text());
     }else{
+      console.log("claiming clients");
       self.clients.claim().then(()=>{
         clients[0].postMessage(data.text());
       })
