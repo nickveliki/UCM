@@ -1,4 +1,4 @@
-importScripts("precache-manifest.e1293e0d54e3c041d6ad3cf26dfbcd1c.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.999276a19f78b4a18c3e1ced41180f7e.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 workbox.core.skipWaiting();
 self.addEventListener('activate', event => {
@@ -18,7 +18,7 @@ workbox.routing.registerRoute(
   new workbox.strategies.StaleWhileRevalidate()
 );
 self.addEventListener('message', ( {source})=>{
-    source.postMessage(JSON.stringify({show: true, title:"READY TO ROCK!", body:"You can now receive notifications on this app. Please allow them, we promise we won't bother you!"}))
+    source.postMessage(JSON.stringify({show: true, title:"READY TO ROCK!", body:"You can now receive notifications on this app. These will help you. A LOT!"}))
 })
 self.addEventListener('push', ({data}) => {
   self.clients.matchAll().then((clients)=>{
