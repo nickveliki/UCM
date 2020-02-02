@@ -20,7 +20,7 @@ const getFingerPrints = () => new Promise((res, rej)=>{
 const registerNew = ({alias, key})=>new Promise((res, rej)=>{
     const fingerprint = crypto.createHash("sha256").update(key).digest("hex");
     return jables.writeDefinition({location, definition:{path: "fingerprints", indexKey:"fingerprint", fingerprint, alias, publicKey: key, messages: []}}).then(()=>{
-        res({alias, fingerprint});
+        res({fingerprint, alias, publicKey: key});
     }).catch((err)=>{rej(err)})
 })
 setInterval(()=>{

@@ -1,4 +1,4 @@
-importScripts("precache-manifest.720559fae0d1a1b240baba61a40a16be.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.81cdbe83650b1e4e437e50ec6bcb8001.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 workbox.core.skipWaiting();
 self.addEventListener('activate', event => {
@@ -28,10 +28,20 @@ self.addEventListener('push', ({data}) => {
     }else{
       console.log("claiming clients");
       self.clients.claim().then(()=>{
-        clients[0].postMessage(data.text());
+        self.clients.matchAll().then((clients)=>{
+          clients[0].postMessage(data.text());
+        })
       })
     }
   })
 });
+self.onnotificationclick=(event)=>{
+  event.notification.close()
+    self.clients.matchAll().then((clientList) =>{
+      if(clientList[0]){
+        clientList[0].focus();
+      }
+    })
 
+}
 workbox.precaching.precacheAndRoute(self.__precacheManifest);

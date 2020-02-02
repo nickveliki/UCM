@@ -64,7 +64,7 @@ route.post("/message/:src/:dest", (req, res, next)=>{
     console.log("POST request to submit message");
     jables.sendMessage(req.params.src, req.params.dest, req.body.message).then((ful)=>{
         res.status(201).json("message sent");
-        pushMessage(req.params.dest, `${JSON.stringify({title:'YOU GOT MAIL', show:false, body:req.params.src})}`).then((status)=>{
+        pushMessage(req.params.dest, `${JSON.stringify({title:'YOU GOT MAIL', show:false, body:req.params.src, message: {message: req.body.message, from: req.params.src, timestamp: Date.now()}})}`).then((status)=>{
             pushMessage(req.params.src, JSON.stringify({title:'MESSAGE SENT', show: false, body:req.params.dest, online:status==201})).then(()=>{}).catch(console.log)
         }).catch(console.log);
     }).catch((err)=>{
@@ -98,7 +98,7 @@ route.post("/subscribe/:fingerprint", (req, res, next)=>{
                 pushMessage(fingerprint, {show: true, title: "SUCCESFUL DEVICE REGISTRATION", body:"You will now receive notifications on this device"}).then(()=>{}, console.log);
             }else{
                 pushMessage(fingerprint, {show:true, title: "NEW DEVICE REGISTRATION", body:"If this wasn't you, you've been hacked. Deal with it..."}).then(()=>{
-                    console.log(activeSubscriptions.splice(i, 1, {fingerprint, subscription:{endpoint, p256dh, auth}}), fingerprint);
+                    activeSubscriptions.splice(i, 1, {fingerprint, subscription:{endpoint, p256dh, auth}})
                     pushMessage(fingerprint, {show: true, title: "SUCCESFUL DEVICE REGISTRATION", body:"You will now receive notifications on this device"});
                     res.status(200).json("ok");
                 }, console.log);
@@ -139,7 +139,7 @@ route.post("/", (req, res, next)=>{
     const alias = req.body.alias;
     jables.registerNew({alias, key}).then((ful)=>{
         res.status(201).json(ful);
-        const newusermessage = JSON.stringify({show: true, title: 'NEW USER' ,body:`${req.body.alias} is available for communication`});
+        const newusermessage = JSON.stringify({show: true, title: 'NEW USER' ,body:`${req.body.alias} is available for communication`, contact: ful});
         activeSubscriptions.forEach(({subscription})=>{
             webpush.sendNotification({
                 endpoint: subscription.endpoint,
