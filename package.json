@@ -15,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jables": "git+https://github.com/nickveliki/Jabels.git",
     "jables-multiproc": "git+https://github.com/nickveliki/jables-multiproc.git",
     "web-push": "^3.4.3"
